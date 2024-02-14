@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -68,8 +67,8 @@ void FixedUpdate(){
 }
 
 void Move(){
-    moveInput = controls.uhri.spin.ReadValue<Vector2>();
-    Vector2 movement = new Vector2(moveInput.x, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
+    moveInput = controls.victim.spin.ReadValue<Vector2>();
+    Vector2 movement = new Vector2(moveInput.x, moveInput.y) * paino * Time.fixedDeltaTime;
     body.MovePosition(body.position + movement);
    
 
