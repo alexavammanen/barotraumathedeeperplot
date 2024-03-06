@@ -35,6 +35,15 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""pudotus"",
+                    ""type"": ""Button"",
+                    ""id"": ""1cba0d9e-d4f3-412a-976d-611ff2b2ac4a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,28 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
                     ""action"": ""spin"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ba3e3a8-bf0c-474a-a8cb-849aa39ee54e"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pudotus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68a0811e-811b-4745-b029-4708beef117e"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pudotus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +132,7 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
         // victim
         m_victim = asset.FindActionMap("victim", throwIfNotFound: true);
         m_victim_spin = m_victim.FindAction("spin", throwIfNotFound: true);
+        m_victim_pudotus = m_victim.FindAction("pudotus", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +195,13 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_victim;
     private List<IVictimActions> m_VictimActionsCallbackInterfaces = new List<IVictimActions>();
     private readonly InputAction m_victim_spin;
+    private readonly InputAction m_victim_pudotus;
     public struct VictimActions
     {
         private @Syvyys m_Wrapper;
         public VictimActions(@Syvyys wrapper) { m_Wrapper = wrapper; }
         public InputAction @spin => m_Wrapper.m_victim_spin;
+        public InputAction @pudotus => m_Wrapper.m_victim_pudotus;
         public InputActionMap Get() { return m_Wrapper.m_victim; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +214,9 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
             @spin.started += instance.OnSpin;
             @spin.performed += instance.OnSpin;
             @spin.canceled += instance.OnSpin;
+            @pudotus.started += instance.OnPudotus;
+            @pudotus.performed += instance.OnPudotus;
+            @pudotus.canceled += instance.OnPudotus;
         }
 
         private void UnregisterCallbacks(IVictimActions instance)
@@ -187,6 +224,9 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
             @spin.started -= instance.OnSpin;
             @spin.performed -= instance.OnSpin;
             @spin.canceled -= instance.OnSpin;
+            @pudotus.started -= instance.OnPudotus;
+            @pudotus.performed -= instance.OnPudotus;
+            @pudotus.canceled -= instance.OnPudotus;
         }
 
         public void RemoveCallbacks(IVictimActions instance)
@@ -207,5 +247,6 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
     public interface IVictimActions
     {
         void OnSpin(InputAction.CallbackContext context);
+        void OnPudotus(InputAction.CallbackContext context);
     }
 }

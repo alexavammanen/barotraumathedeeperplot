@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class helm : MonoBehaviour
     private Syvyys controls;
 
     private Vector2 moveInput;
+
+    public Transform luukku;
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,37 +33,25 @@ public class helm : MonoBehaviour
 
     }
 
+    void Update(){
+        pudotus();
+        
+
+    }
+
+    private void pudotus()
+    {
+        if(controls.victim.pudotus.triggered){
+            Debug.Log("keventyi");
+            GameObject pilotti = allas.Instace.Recall();
+            pilotti.transform.position = luukku.position;
+            pilotti.transform.position = luukku.position;
 
 
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void FixedUpdate(){
+    void FixedUpdate(){
 
      Move();
 
@@ -78,8 +69,5 @@ void Move(){
 
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

@@ -6,7 +6,7 @@ public class allas : MonoBehaviour
 {
     public static allas Instace;
     public GameObject pilotti;
-    public int pilotinkoko = 20;
+    public int pilotinkoko = 2000;
 
 private Queue<GameObject> pilottiallas = new Queue<GameObject>();
 
@@ -40,6 +40,13 @@ private Queue<GameObject> pilottiallas = new Queue<GameObject>();
         }
         return null;
 
+
+
+    }
+
+    public void extraction(GameObject pilotti){
+        pilotti.SetActive(false);
+        pilottiallas.Enqueue(pilotti);
 
 
     }
