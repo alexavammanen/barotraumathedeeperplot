@@ -15,6 +15,9 @@ public class helm : MonoBehaviour
     private Vector2 moveInput;
 
     public Transform luukku;
+
+    private Vector2 reanimation_protocol;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,9 +37,23 @@ public class helm : MonoBehaviour
     }
 
     void Update(){
-        pudotus();
-        
 
+    
+        pudotus();
+        Tarahdys();
+
+    }
+    private void Tarahdys(){
+        reanimation_protocol = controls.victim.reanimation_protocol.ReadValue<Vector2>();
+        Debug.Log(reanimation_protocol);
+    }
+    private bool hirtto(){
+        if(Mouse.current.delta.ReadValue().sqrMagnitude > 0.1){
+            return true;
+        }
+    }
+    private bool nuol(){
+        
     }
 
     private void pudotus()
@@ -44,6 +61,11 @@ public class helm : MonoBehaviour
         if(controls.victim.pudotus.triggered){
             Debug.Log("keventyi");
             GameObject pilotti = allas.Instace.Recall();
+
+            if(pilotti == null){
+                return;
+            }
+
             pilotti.transform.position = luukku.position;
             pilotti.transform.position = luukku.position;
 

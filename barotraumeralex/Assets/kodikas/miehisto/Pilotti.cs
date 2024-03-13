@@ -5,19 +5,24 @@ using UnityEngine;
 public class Pilotti : MonoBehaviour
 {
     private float paine = 5f;
+    private float ennen_elakeeta = 2.5f;
+    private float pommi;
 
+private void OnEnable(){
+    pommi = ennen_elakeeta;
 
+}
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.up * -1 * paine * Time.deltaTime);
+        pommi -= Time.deltaTime;
+        if(pommi <= 0 ){
+            allas.Instace.extraction(gameObject);
+        }
+        
     }
 }

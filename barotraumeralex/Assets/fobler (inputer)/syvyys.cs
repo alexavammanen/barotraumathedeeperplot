@@ -44,6 +44,15 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""reanimation_protocol"",
+                    ""type"": ""Value"",
+                    ""id"": ""30d2150d-6912-4531-b1f6-427c8c21c90d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -123,6 +132,83 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
                     ""action"": ""pudotus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72389569-91f8-4eec-8584-581880fcf491"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7d4b238-1730-455e-acb4-fe00ec74a717"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""vampiresurvivor"",
+                    ""id"": ""d8e9e90f-5b77-4329-8fec-ba2565650596"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f0b9e510-2931-4a32-8b33-0ca30b24ce56"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""654aee04-1b0f-4127-a38f-24417489dc73"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""019a8705-22ff-4f0e-892f-708b14148a10"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e6f9b132-429d-4f92-9120-a51b313f87c2"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reanimation_protocol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -133,6 +219,7 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
         m_victim = asset.FindActionMap("victim", throwIfNotFound: true);
         m_victim_spin = m_victim.FindAction("spin", throwIfNotFound: true);
         m_victim_pudotus = m_victim.FindAction("pudotus", throwIfNotFound: true);
+        m_victim_reanimation_protocol = m_victim.FindAction("reanimation_protocol", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,12 +283,14 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
     private List<IVictimActions> m_VictimActionsCallbackInterfaces = new List<IVictimActions>();
     private readonly InputAction m_victim_spin;
     private readonly InputAction m_victim_pudotus;
+    private readonly InputAction m_victim_reanimation_protocol;
     public struct VictimActions
     {
         private @Syvyys m_Wrapper;
         public VictimActions(@Syvyys wrapper) { m_Wrapper = wrapper; }
         public InputAction @spin => m_Wrapper.m_victim_spin;
         public InputAction @pudotus => m_Wrapper.m_victim_pudotus;
+        public InputAction @reanimation_protocol => m_Wrapper.m_victim_reanimation_protocol;
         public InputActionMap Get() { return m_Wrapper.m_victim; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -217,6 +306,9 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
             @pudotus.started += instance.OnPudotus;
             @pudotus.performed += instance.OnPudotus;
             @pudotus.canceled += instance.OnPudotus;
+            @reanimation_protocol.started += instance.OnReanimation_protocol;
+            @reanimation_protocol.performed += instance.OnReanimation_protocol;
+            @reanimation_protocol.canceled += instance.OnReanimation_protocol;
         }
 
         private void UnregisterCallbacks(IVictimActions instance)
@@ -227,6 +319,9 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
             @pudotus.started -= instance.OnPudotus;
             @pudotus.performed -= instance.OnPudotus;
             @pudotus.canceled -= instance.OnPudotus;
+            @reanimation_protocol.started -= instance.OnReanimation_protocol;
+            @reanimation_protocol.performed -= instance.OnReanimation_protocol;
+            @reanimation_protocol.canceled -= instance.OnReanimation_protocol;
         }
 
         public void RemoveCallbacks(IVictimActions instance)
@@ -248,5 +343,6 @@ public partial class @Syvyys: IInputActionCollection2, IDisposable
     {
         void OnSpin(InputAction.CallbackContext context);
         void OnPudotus(InputAction.CallbackContext context);
+        void OnReanimation_protocol(InputAction.CallbackContext context);
     }
 }
