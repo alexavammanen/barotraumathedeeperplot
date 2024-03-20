@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,16 +45,31 @@ public class helm : MonoBehaviour
     }
     private void Tarahdys(){
         reanimation_protocol = controls.victim.reanimation_protocol.ReadValue<Vector2>();
+        if(reanimation_protocol.sqrMagnitude > 0.1){
+            Vector2 tarahdyssiainti = Vector2.zero;
+            if(hirtto()){
+                Vector3 mouseposition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                mouseposition.z = 0;
+                tarahdyssiainti = mouseposition - luukku.position;
+            }
+            else{
+                tarahdyssiainti = reanimation_protocol;
+
+
+            }
+            float angle = Mathf.Atan2 (tarahdyssiainti.x, -tarahdyssiainti.y) * Mathf.Rad2Deg;
+            luukku.rotation = Quaternion.Euler(0,0,angle);
+        }
         Debug.Log(reanimation_protocol);
     }
     private bool hirtto(){
         if(Mouse.current.delta.ReadValue().sqrMagnitude > 0.1){
             return true;
         }
+
+        return false;
     }
-    private bool nuol(){
-        
-    }
+    
 
     private void pudotus()
     {
@@ -67,7 +82,7 @@ public class helm : MonoBehaviour
             }
 
             pilotti.transform.position = luukku.position;
-            pilotti.transform.position = luukku.position;
+            pilotti.transform.rotation = luukku.rotation;
 
 
         }
