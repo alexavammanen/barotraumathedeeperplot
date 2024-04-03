@@ -25,6 +25,10 @@ public class helm : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
 
     }
+    void Start(){
+        GameManager.Instance.getPlayer = this;
+
+    }
 
 
     void OnEnable(){

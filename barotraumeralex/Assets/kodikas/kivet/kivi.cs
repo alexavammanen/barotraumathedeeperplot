@@ -6,7 +6,7 @@ using UnityEngine;
 public class kivi : MonoBehaviour
 {
 
-    private float paino = 31f;
+    private float paino = 3f;
     private Rigidbody2D keho;
     public Transform kotisi;
 
@@ -28,9 +28,15 @@ public class kivi : MonoBehaviour
     {
         if(kotisi == null)
         {
+            getPlayer();
             return;
         }
         Vector2 loyto = (kotisi.position - transform.position).normalized;
         keho.MovePosition(keho.position + loyto * paino * Time.fixedDeltaTime);
+    }
+
+    void getPlayer(){
+        kotisi = GameManager.Instance.getPlayer.transform;
+
     }
 }
