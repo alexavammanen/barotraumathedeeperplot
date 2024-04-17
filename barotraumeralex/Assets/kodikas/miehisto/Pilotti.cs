@@ -25,4 +25,22 @@ private void OnEnable(){
         }
         
     }
+    void OnTriggerEnter2D (Collider2D other){
+
+        IDamageable vuotava = other.GetComponent<IDamageable>();
+        if(vuotava != null){
+            vuotava.Ilmaista(1);
+            allas.Instace.extraction(gameObject);
+        }
+
+
+
+    }
+
+
+
+
+
+
+
 }

@@ -89,9 +89,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1907929524309373626, guid: ed26e168404ad4946b1676f1214a477f, type: 3}
+      propertyPath: m_Size.x
+      value: 3.7505481
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907929524309373626, guid: ed26e168404ad4946b1676f1214a477f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9578538
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907929524309373626, guid: ed26e168404ad4946b1676f1214a477f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.8889798
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907929524309373626, guid: ed26e168404ad4946b1676f1214a477f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.041682005
+      objectReference: {fileID: 0}
     - target: {fileID: 5036817945131809765, guid: ed26e168404ad4946b1676f1214a477f, type: 3}
       propertyPath: m_Name
-      value: terava_ukko
+      value: terava_ukko Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5036817945131809771, guid: ed26e168404ad4946b1676f1214a477f, type: 3}
       propertyPath: m_RootOrder
