@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class kivi : MonoBehaviour, IDamageable
@@ -9,23 +10,26 @@ public class kivi : MonoBehaviour, IDamageable
     private float paino = 3f;
     private Rigidbody2D keho;
     public Transform kotisi;
-    public int kotisikoko = 1;
-    public int halusikotiin = 1;
+    public int kotisikoko = 10;
+    public int halusikotiin = 10;
 
-    public int kodikestavys = 1;
-    public int kotikesti = 1;
+    public int kodikestavys = 10;
+    public int kotikesti = 2;
 
-    public int kotikatos = 1;
+    public int kotikatos = 10;
 
-    public int kotiin = 1;
+    public int kotiin = 10;
 
-    private float kotikello = 1;
+    private float kotikello = 10;
+
+    private bool kotiiiiin = false;
 
 
     public int nom = 31;
 
     private int soi = 0;
 
+    Vector2 loyto;
 
 
 
@@ -41,10 +45,75 @@ public class kivi : MonoBehaviour, IDamageable
 
     }
 
+    private void Ammu(){
+
+
+        if(kotisi == null)
+        {
+
+            return;
+        }
+
+        if (kotikello > 0){
+
+            kotikello -= Time.fixedDeltaTime;
+
+        }
+
+        
+
+        else if(!kotiiiiin && Vector2.Distance(transform.position, kotisi.position)< kotisikoko){
+
+            StartCoroutine(nopieastkottiin());
+            //Debug.Log("eee");
+        }
+
+
+
+        
+
+        
+
+
+    }
+
+
+    //private void OnDisable{
+
+
+
+    
+    IEnumerator nopieastkottiin(){
+
+            kotiiiiin = true;
+            float alota = Time.time;
+
+            while(Time.time < alota * kotikesti){
+                keho.velocity = loyto * halusikotiin;
+                yield return null;
+
+
+
+            }
+            keho.velocity = Vector2.zero;
+                    
+
+            
+
+
+            kotiiiiin = false;
+
+            kotikello = halusikotiin;
+            
+        }
+
     // Update is called once per frame
     void FixedUpdate(){
         Tippu();
+        Ammu();
+        
     }
+
 
     private void Tippu()
     {
@@ -53,7 +122,14 @@ public class kivi : MonoBehaviour, IDamageable
             getPlayer();
             return;
         }
-        Vector2 loyto = (kotisi.position - transform.position).normalized;
+
+        if(kotiiiiin == true){
+            return;
+
+        }
+
+
+        loyto = (kotisi.position - transform.position).normalized;
         keho.MovePosition(keho.position + loyto * paino * Time.fixedDeltaTime);
     }
 
