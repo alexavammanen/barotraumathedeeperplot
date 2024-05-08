@@ -27,6 +27,10 @@ private void OnEnable(){
     }
     void OnTriggerEnter2D (Collider2D other){
 
+        if(other.CompareTag("Player")){
+            return;
+        }
+
         IDamageable vuotava = other.GetComponent<IDamageable>();
         if(vuotava != null){
             vuotava.Ilmaista(1);

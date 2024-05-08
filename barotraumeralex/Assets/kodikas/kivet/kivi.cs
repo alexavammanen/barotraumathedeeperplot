@@ -150,4 +150,18 @@ public class kivi : MonoBehaviour, IDamageable
     {
         EnemyPoolManager.Instance.ReturnEnemy(gameObject);
     }
+    void OnTriggerEnter2D (Collider2D other){
+
+
+
+        if(other.CompareTag("Player")&& kotiiiiin){
+            other.GetComponent<IDamageable>().Ilmaista(1);
+
+        }
+
+
+
+
+
+    }
 }

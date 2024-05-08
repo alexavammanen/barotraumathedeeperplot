@@ -120,7 +120,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kotisi: {fileID: 0}
-  nom: 31
+  kotisikoko: 20
+  halusikotiin: 20
+  kodikestavys: 20
+  kotikesti: 21
+  kotikatos: 20
+  kotiin: 20
+  nom: 30
 --- !u!114 &728291037690701618
 MonoBehaviour:
   m_ObjectHideFlags: 0

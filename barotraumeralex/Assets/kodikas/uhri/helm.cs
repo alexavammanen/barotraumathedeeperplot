@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class helm : MonoBehaviour
+public class helm : MonoBehaviour,IDamageable
 {
+
+    public int ilmaa = 6;
     public float paino = 8614f;
+
+    private int ilma;
 
     private Rigidbody2D body;
 
@@ -27,6 +31,7 @@ public class helm : MonoBehaviour
     }
     void Start(){
         GameManager.Instance.getPlayer = this;
+        ilma = ilmaa;
 
     }
 
@@ -64,7 +69,7 @@ public class helm : MonoBehaviour
             float angle = Mathf.Atan2 (tarahdyssiainti.x, -tarahdyssiainti.y) * Mathf.Rad2Deg;
             luukku.rotation = Quaternion.Euler(0,0,angle);
         }
-        Debug.Log(reanimation_protocol);
+        //Debug.Log(reanimation_protocol);
     }
     private bool hirtto(){
         if(Mouse.current.delta.ReadValue().sqrMagnitude > 0.1){
@@ -104,6 +109,22 @@ void Move(){
     body.MovePosition(body.position + movement);
    
 
+}
+
+public void Ilmaista(int vetta)
+{
+
+    ilma -= vetta;
+    if (ilma <=0){
+        KOULE();
+    }
+    Debug.Log("vetta");
+
+}
+public void KOULE(){
+    gameObject.SetActive(false);
+
+    Debug.Log("ez");
 }
 
 
