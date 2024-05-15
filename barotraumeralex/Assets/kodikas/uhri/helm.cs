@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class helm : MonoBehaviour,IDamageable
 {
 
+    public GameObject ei_vitamiineja;
+
     public int ilmaa = 6;
     public float paino = 8614f;
 
@@ -124,7 +126,10 @@ public void Ilmaista(int vetta)
 public void KOULE(){
     gameObject.SetActive(false);
 
+    Instantiate(ei_vitamiineja,transform.position, Quaternion.identity);
+
     Debug.Log("ez");
+    GameManager.Instance.vaihdo(GameState.ei_peli);
 }
 
 
