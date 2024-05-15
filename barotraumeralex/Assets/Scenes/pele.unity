@@ -521,6 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7a006640737464cb3c9146518dea95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ei_vitamiineja: {fileID: 6695635043183075782, guid: 17b6934bbb8654a4f848fbfd5b8a5dec, type: 3}
+  ilmaa: 6
   paino: 9
   luukku: {fileID: 198331902}
 --- !u!61 &466252646
@@ -578,6 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf0edd1eb91fd948942267da2649996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nytpeli: 0
 --- !u!4 &895849357
 Transform:
   m_ObjectHideFlags: 0
